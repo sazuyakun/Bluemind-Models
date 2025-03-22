@@ -52,6 +52,7 @@ class NERModel:
 # The GOD-LLM: Llama 3.3 70B Versatile on Groq
 class LLMModel:
     def __init__(self):
+        # self.model = ModelFactory.get("6646261c6eb563165658bbb1")
         self.model = ModelFactory.get("677c16166eb563bb611623c1")
 
     def get_response(self, text):

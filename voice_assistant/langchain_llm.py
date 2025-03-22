@@ -19,5 +19,5 @@ class CustomLLM(LLM):
 
     def _call(self, prompt: str, stop: Optional[List[str]] = None) -> str:
         """Process input using your LLMModel"""
-        response = self.model.get_response(prompt)  # Call your existing model
-        return response.strip()
+        _, response = self.model.get_response_for_audio(prompt)  # Call your existing model
+        return response
