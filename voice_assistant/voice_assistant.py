@@ -5,8 +5,8 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.runnables import RunnableLambda
 from langchain.chains import LLMChain
 from langchain.memory import ConversationBufferWindowMemory
-from model_classes import ASRModel, NERModel, TTSModelEdge, TTSModelAixplain
-from langchain_llm import CustomLLM  # Importing CustomLLM
+from voice_assistant.model_classes import ASRModel, NERModel, TTSModelEdge, TTSModelAixplain
+from voice_assistant.langchain_llm import CustomLLM  # Importing CustomLLM
 
 class VoiceAssistant:
     def __init__(self, max_memory_window: int = 10):

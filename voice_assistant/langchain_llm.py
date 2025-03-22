@@ -1,7 +1,7 @@
 from langchain_core.language_models.llms import LLM
 from langchain_core.prompts import PromptTemplate
 from typing import Any, List, Optional
-from model_classes import LLMModel  # Import your existing LLM
+from voice_assistant.model_classes import LLMModel  # Import your existing LLM
 from pydantic import Field
 
 class CustomLLM(LLM):
