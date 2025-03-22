@@ -1,0 +1,5 @@
+voice_assistant/test_assistant.ipynb
+voice_assistant/.aixplain_cache
+voice_assistant/__pycache__
+
+.env
