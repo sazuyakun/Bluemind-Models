@@ -20,6 +20,11 @@ def predict():
         'audio_response': audio_response
     })
 
+@app.route('/get_conversation_history', methods=['GET'])
+def history():
+    return jsonify({
+        'history': model.get_conversation_history()
+    })
 
 @app.route('/irrigation_plan', methods=['POST'])
 def irrigation_recommend():

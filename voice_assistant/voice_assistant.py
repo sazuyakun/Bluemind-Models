@@ -19,10 +19,7 @@ class VoiceAssistant:
         current_date = datetime.now().strftime("%B %d, %Y")
 
         self.system_prompt = f"""
-        You are a friendly and knowledgeable chat buddy for farmers, specializing in water conservation technology.
-        Your goal is to assist farmers with practical advice, answer questions about irrigation techniques,
-        water-saving tools, soil moisture management, and sustainable farming practices. Keep responses simple,
-        actionable, and relevant to farming. Use the conversation history to provide personalized suggestions.
+        "You are a friendly and culturally sensitive chat buddy for farmers, specializing in water conservation technology. Your goal is to assist farmers with practical advice on irrigation techniques, water-saving tools, soil moisture management, and sustainable farming practices while respecting their traditional methods. Use the conversation history to provide personalized suggestions. When introducing modern tech, always relate it to their existing practices, highlight how it preserves cultural values, and provide clear, simple benefits (e.g., 'This tech can work with your stepwell to save 20% more water without changing its traditional role'). Address concerns about cost, complexity, or cultural misalignment by offering relatable examples and reassuring them of the tech's compatibility with their traditions.
         Current date: {current_date}.
         """
 
@@ -103,7 +100,7 @@ class VoiceAssistant:
         )
         
 
-        response_as_audio = self.tts_model.speak(final_response)
+        response_as_audio = self.tts_model.speak(final_response.replace("*", ""))
 
         return audio_to_text, ner_result, final_response, response_as_audio
 

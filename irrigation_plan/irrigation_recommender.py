@@ -82,9 +82,9 @@ def generate_irrigation_plan(crop_type, growth_stage, soil_type, weather, exact_
         f"Water {irrigation_liters} liters per square meter daily at 6 AM."
     )
 
-    text = f"Exact Location to be mentioned: {exact_location}. generate an irrigation plan with minimal water wastage for {crop_type} give in detail when to water how much to water in accordance with rain and everything For {crop_type} in the {growth_stage} stage growing in {soil_type} soil temperature: {weather['temp']}K, humidity: {weather['humidity']} rain: {weather['rain']}mm, wind: {weather['wind_speed']}m/s"
+    text = f"Exact Location to be mentioned: {exact_location}. Generate an irrigation plan with minimal water wastage for {crop_type}. Method to be mentioned: Give the most suitable, most efficient technology for irrigation. For {crop_type} in the {growth_stage} stage growing in {soil_type} soil temperature: {weather['temp']}K, humidity: {weather['humidity']} rain: {weather['rain']}mm, wind: {weather['wind_speed']}m/s"
     
-    result = model.get_response(text)
+    result = model.get_response(text, irrigation_plan=True)
 
     return result
 

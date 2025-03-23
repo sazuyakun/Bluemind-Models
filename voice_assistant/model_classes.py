@@ -55,18 +55,21 @@ class LLMModel:
         # self.model = ModelFactory.get("6646261c6eb563165658bbb1")
         self.model = ModelFactory.get("677c16166eb563bb611623c1")
 
-    def get_response(self, text):
+    def get_response(self, text, irrigation_plan=False):
         print("LLM generating response")
-        self.result = self.model.run({
-            "text": text,
-            # "prompt": "<PROMPT_TEXT_DATA>",
-            # "context": "<CONTEXT_TEXT_DATA>",
-            # "max_tokens": "<MAX_TOKENS_NUMBER_DATA>",
-            # "temperature": "<TEMPERATURE_NUMBER_DATA>",
-            # "top_p": "<TOP_P_NUMBER_DATA>",
-            # "seed": "<SEED_NUMBER_DATA>",
-            # "history": "<HISTORY_TEXT_DATA>"
-        })
+        if irrigation_plan:
+            self.result = self.model.run({
+                "text": text,
+                # "prompt": "<PROMPT_TEXT_DATA>",
+                # "context": "<CONTEXT_TEXT_DATA>",
+                "max_tokens": "1024",
+                # "temperature": "<TEMPERATURE_NUMBER_DATA>",
+                # "top_p": "<TOP_P_NUMBER_DATA>",
+                # "seed": "<SEED_NUMBER_DATA>",
+                # "history": "<HISTORY_TEXT_DATA>"
+            })
+        else:
+            self.result = self.model.run({"text": text, "max_tokens": "128"})
         print("LLM has responded!")
         return self.result.data
 
