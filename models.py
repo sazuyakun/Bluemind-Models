@@ -1,9 +1,13 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS  # Add this import
 from voice_assistant.voice_assistant import VoiceAssistant
 from cultural_modern.water_conservation_analyzer import WaterConservationAnalyzer
 from irrigation_plan.irrigation_recommender import irrigation_recommendation_engine, get_location_from_coords
 
+from cultural_practices.app import predict_festival_and_practice
+
 app = Flask(__name__)
+CORS(app)
 
 assistant_model = VoiceAssistant()
 water_conservation_analyzer = WaterConservationAnalyzer()
@@ -20,16 +24,6 @@ def predict():
 
     return jsonify({
         'audio_response': audio_response
-    })
-
-@app.route('/chat_response', methods=['POST'])
-def chat_response():
-    data = request.get_json()
-    text = data['user']
-    response = assistant_model.chat(text=text)
-    
-    return jsonify({
-        'agent': response 
     })
 
 @app.route('/get_conversation_history', methods=['GET'])
@@ -81,7 +75,25 @@ def water_analyse():
         "modern_description": modern_description
     })
 
-
+@app.route('/predict_festival_practice', methods=['POST'])
+def predict_festival_practice():
+    data = request.get_json()
+    transcript = data.get('transcript', '')
+    if not transcript:
+        return jsonify({'error': 'No transcript provided'}), 400
+    
+    predicted_festival, predicted_practice = predict_festival_and_practice(transcript)
+    return jsonify({
+        'predicted_festival': predicted_festival,
+        'predicted_practice': predicted_practice
+    })
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=7000, debug=True)
+
+
+# {
+#   "crop": "wheat",
+#   "stage": "seedling",
+#   "location": [40.7128, -74.0060]
+# }
