@@ -124,6 +124,7 @@ class VoiceAssistant:
 #     print(f"Transcription: {text}")
 #     print(f"NER Result: {ner}")
 #     print(f"Assistant Response: {response}")
+#     print(assistant.get_conversation_history()))
 
 
 # =================================================================

@@ -55,9 +55,9 @@ class LLMModel:
         # self.model = ModelFactory.get("6646261c6eb563165658bbb1")
         self.model = ModelFactory.get("677c16166eb563bb611623c1")
 
-    def get_response(self, text, irrigation_plan=False):
+    def get_response(self, text, long_context=False):
         print("LLM generating response")
-        if irrigation_plan:
+        if long_context:
             self.result = self.model.run({
                 "text": text,
                 # "prompt": "<PROMPT_TEXT_DATA>",
