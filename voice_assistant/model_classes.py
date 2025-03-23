@@ -69,7 +69,7 @@ class LLMModel:
                 # "history": "<HISTORY_TEXT_DATA>"
             })
         else:
-            self.result = self.model.run({"text": text, "max_tokens": "128"})
+            self.result = self.model.run({"text": text, "max_tokens": "64"})
         print("LLM has responded!")
         return self.result.data
 

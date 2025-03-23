@@ -104,11 +104,41 @@ class VoiceAssistant:
 
         return audio_to_text, ner_result, final_response, response_as_audio
 
+    def chat(self, text):
+        ner_result = None
+        raw_response = None
+
+        def run_ner():
+            nonlocal ner_result
+            ner_result = self.ner_model.extract_entities(text)
+
+        def run_llm():
+            nonlocal raw_response
+            raw_response = self.chain.invoke({"query": text})
+
+        threads = [
+            threading.Thread(target=run_ner),
+            threading.Thread(target=run_llm)
+        ]
+
+        for thread in threads:
+            thread.start()
+        for thread in threads:
+            thread.join()
+
+        final_response = raw_response['text']
+        self.memory.save_context(
+            {"query": text},
+            {"output": final_response or "Sorry, I couldn't process that."}
+        )
+        return final_response
+
     def get_conversation_history(self) -> list:
         return self.memory.chat_memory.messages
 
     def clear_memory(self) -> None:
         self.memory.clear()
+    
 
 
 # assistant = VoiceAssistant()

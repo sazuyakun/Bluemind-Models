@@ -22,6 +22,16 @@ def predict():
         'audio_response': audio_response
     })
 
+@app.route('/chat_response', methods=['POST'])
+def chat_response():
+    data = request.get_json()
+    text = data['user']
+    response = assistant_model.chat(text=text)
+    
+    return jsonify({
+        'agent': response 
+    })
+
 @app.route('/get_conversation_history', methods=['GET'])
 def history():
     history = assistant_model.get_conversation_history()
@@ -70,6 +80,8 @@ def water_analyse():
         "improved_efficiency": improved_efficiency,
         "modern_description": modern_description
     })
+
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=7000, debug=True)
